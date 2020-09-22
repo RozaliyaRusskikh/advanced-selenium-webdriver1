@@ -48,6 +48,12 @@ public class AlertPage extends BasePageObject {
         alert.sendKeys(text);
         alert.accept();
     }
+
+    public void typeTextIntoAlertDismiss(String text) {
+        Alert alert = switchToAlert();
+        alert.sendKeys(text);
+        alert.dismiss();
+    }
     public String getResultString() {
         return find(resultTextLocator).getText();
     }

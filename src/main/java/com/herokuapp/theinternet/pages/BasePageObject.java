@@ -1,6 +1,8 @@
 package com.herokuapp.theinternet.pages;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
@@ -62,6 +64,15 @@ public class BasePageObject {
         return driver.getCurrentUrl();
     }
 
+    public String getCurrentPageTitle() {
+        return driver.getTitle();
+    }
+
+    public String getCurrentPageSource() {
+        return driver.getPageSource();
+    }
+
+
     /**
      * Wait for specific ExpectedCondition for the given amount of time in seconds
      */
@@ -95,5 +106,22 @@ public class BasePageObject {
         WebDriverWait webDriverWait = new WebDriverWait(driver, 30);
         webDriverWait.until(ExpectedConditions.alertIsPresent());
         return driver.switchTo().alert();
+    }
+
+    public void switchToWindowWithTitle(String string) {
+        String firstWindow = driver.getWindowHandle();
+        Set<String> allWindows = driver.getWindowHandles();
+
+        Iterator<String> windowsIterator = allWindows.iterator();
+
+        while (windowsIterator.hasNext()) {
+            String windowsHandle = windowsIterator.next().toString();
+            if (!windowsHandle.equals(firstWindow)) {
+                driver.switchTo().window(windowsHandle);
+                if (getCurrentPageTitle().equals(string)) {
+                    break;
+                }
+            }
+        }
     }
 }

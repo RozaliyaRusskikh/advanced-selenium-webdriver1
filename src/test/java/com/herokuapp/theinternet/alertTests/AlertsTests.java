@@ -56,6 +56,30 @@ class AlertsTests extends TestUtilities {
     }
 
     @Test
+    public void jsConfirmTest() {
+        WelcomePageObject welcomePageObject = new WelcomePageObject(driver, log);
+        welcomePageObject.openPage();
+
+        AlertPage alertPage = welcomePageObject.clickJSalertLink();
+        // Click on JS Confirm button
+        alertPage.openJSconfirm();
+        // Get alert text
+        String alertMessage = alertPage.getAlertText();
+        // Click on OK button
+        alertPage.acceptAlert();
+        //Get result text
+        String result = alertPage.getResultString();
+
+        //Verifications
+        // 1 Alert text is expected
+        Assert.assertTrue(alertMessage.equals("I am a JS Confirm"));
+
+        // 2 Result text is expected
+
+        Assert.assertTrue(result.equals("You clicked: Ok"));
+    }
+
+    @Test
     public void jsPromptTest() {
         WelcomePageObject welcomePageObject = new WelcomePageObject(driver, log);
         welcomePageObject.openPage();
@@ -72,10 +96,34 @@ class AlertsTests extends TestUtilities {
 
         //Verifications
         // 1 Alert text is expected
-        Assert.assertTrue(alertMessage.equals("I am a JS Prompt"));
+        Assert.assertTrue(alertMessage.equals("I am a JS prompt"));
 
         // 2 Result text is expected
 
-        Assert.assertTrue(result.equals("Hell"));
+        Assert.assertTrue(result.equals("You entered: Hello"));
+    }
+
+    @Test
+    public void jsPromptDismissTest() {
+        WelcomePageObject welcomePageObject = new WelcomePageObject(driver, log);
+        welcomePageObject.openPage();
+
+        AlertPage alertPage = welcomePageObject.clickJSalertLink();
+        // Click on JS Prompt button
+        alertPage.openJSprompt();
+        // Get alert text
+        String alertMessage = alertPage.getAlertText();
+        //
+        alertPage.typeTextIntoAlertDismiss("Hello");
+        //Get result text
+        String result = alertPage.getResultString();
+
+        //Verifications
+        // 1 Alert text is expected
+        Assert.assertTrue(alertMessage.equals("I am a JS prompt"));
+
+        // 2 Result text is expected
+
+        Assert.assertTrue(result.equals("You entered: null"));
     }
 }
