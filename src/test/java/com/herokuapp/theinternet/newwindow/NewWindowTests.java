@@ -18,7 +18,7 @@ class NewWindowTests extends TestUtilities {
         windowPage.openNewWindow();
         NewWindowPage newWindowPage = windowPage.switchToNewWindowsPage();
 
-        String pageSource = newWindowPage.getCurrentPageSource();
+        String pageSource = newWindowPage.getCurrentPageTitle();
 
         Assert.assertTrue(pageSource.contains("New Window"));
     }
