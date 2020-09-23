@@ -124,4 +124,8 @@ public class BasePageObject {
             }
         }
     }
+
+    protected void switchToFrame(By frameLocator) {
+        driver.switchTo().frame(find(frameLocator));
+    }
 }
