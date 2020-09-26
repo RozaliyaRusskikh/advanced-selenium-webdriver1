@@ -128,4 +128,13 @@ public class BasePageObject {
     protected void switchToFrame(By frameLocator) {
         driver.switchTo().frame(find(frameLocator));
     }
+
+    protected void pressKey(By locator, Keys key) {
+        find(locator).sendKeys(key);
+    }
+
+    public void scrollToBottom() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
 }

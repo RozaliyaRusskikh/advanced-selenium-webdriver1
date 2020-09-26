@@ -15,6 +15,8 @@ class EditorTest extends TestUtilities {
 
         welcomePageObject.openPage();
 
+        welcomePageObject.scrollToBottom();
+
         WYSIWYGEditorPage wysiwygEditorPage = welcomePageObject.enterWYSIWYGEditorLink();
 
         String editorText = wysiwygEditorPage.getEditorText();
